@@ -1,11 +1,16 @@
 var ProductBox = React.createClass({
-    loadCommentsFromServer: function () {
+    loadProductsFromServer: function () {
         $.ajax({
             url: this.props.url,
+            type: 'GET',
+            contentType: 'application/json',
             dataType: 'json',
             cache: false,
+            crossDomain: true,
             success: function (data) {
-                this.setState({data: data});
+                console.log("Server data:: " + JSON.stringify(data));
+                var products = data._embedded.products;
+                this.setState({data: products});
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -16,8 +21,8 @@ var ProductBox = React.createClass({
         return {data: []};
     },
     componentDidMount: function () {
-        this.loadCommentsFromServer();
-        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+        this.loadProductsFromServer();
+        //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     },
     render: function () {
         return (
@@ -33,9 +38,9 @@ var ProductBox = React.createClass({
 
 var ProductList = React.createClass({
     render: function () {
-        var productNodes = this.props.data.map(function (product) {
+        var productNodes = this.props.data.map(function (product, index) {
             return (
-                <Product productId={product.productId} productName={product.productName}>
+                <Product productId={product.productId} productName={product.productName} key={index}>
                     Product is {product.productId}!
                 </Product>
             );
@@ -77,7 +82,7 @@ var ProductForm = React.createClass({
 });
 
 React.render(
-    <ProductBox url="http://localhost:8002/api/products" pollInterval={5000}/>,
+    <ProductBox url="http://localhost:8002/api/products" pollInterval={1000}/>,
     document.getElementById('content')
 );
 

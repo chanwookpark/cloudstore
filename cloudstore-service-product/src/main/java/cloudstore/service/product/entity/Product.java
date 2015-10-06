@@ -1,5 +1,6 @@
 package cloudstore.service.product.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 public class Product {
 
     @Id
+    @JsonInclude
     private String productId;
 
     //TODO MTA-level 1
