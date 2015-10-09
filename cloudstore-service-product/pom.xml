@@ -10,7 +10,12 @@
     </parent>
     <artifactId>cloudstore-service-product</artifactId>
 
+    <properties>
+        <spring.cloud.version>1.1.0.BUILD-SNAPSHOT</spring.cloud.version>
+    </properties>
+
     <dependencies>
+        <!-- Spring boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -32,6 +37,14 @@
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
 
+        <!-- Spring Cloud -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-aws-jdbc</artifactId>
+            <version>1.1.0.BUILD-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Etc -->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
