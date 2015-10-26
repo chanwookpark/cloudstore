@@ -9,7 +9,7 @@ define(function (require) {
             return ({products: []});
         },
         componentDidMount: function () {
-            client({method: 'GET', path: 'http://127.0.0.1:8002/api/products'}).done(response => {
+            client({method: 'GET', path: 'http://localhost:8002/api/products'}).done(response => {
                 this.setState({products: response.entity._embedded.products});
             });
         },
