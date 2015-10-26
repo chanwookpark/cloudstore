@@ -2,7 +2,7 @@ define(function (require) {
     'use strict';
 
     var React = require('react');
-    var client = require('./client');
+    var client = require('client');
 
     var App = React.createClass({
         getInitialState: function () {

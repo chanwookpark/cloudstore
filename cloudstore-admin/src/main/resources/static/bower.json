@@ -2,7 +2,7 @@
   "name": "cloudstore-admin",
   "version": "1.0.0",
   "description": "Demo of ReactJS + Spring Data REST",
-  "main": "main.js",
+  "main": "./product/main.js",
   "moduleType": [
     "amd"
   ],

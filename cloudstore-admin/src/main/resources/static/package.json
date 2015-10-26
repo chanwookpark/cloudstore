@@ -2,7 +2,7 @@
   "name": "cloudstore-admin",
   "version": "1.0.0",
   "description": "Demo of ReactJS + Spring Data REST",
-  "author": "Chanwook Park",
+  "author": "chanwook",
   "dependencies": {
     "react-tools": "^0.13.3"
   },
