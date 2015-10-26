@@ -72,6 +72,7 @@
             <url>https://repo.spring.io/snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
             </snapshots>
         </repository>
         <repository>
@@ -91,6 +92,7 @@
             <url>https://repo.spring.io/snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
             </snapshots>
         </pluginRepository>
         <pluginRepository>
