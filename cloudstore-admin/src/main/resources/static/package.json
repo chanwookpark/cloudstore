@@ -1,0 +1,12 @@
+{
+  "name": "cloudstore-admin",
+  "version": "1.0.0",
+  "description": "Demo of ReactJS + Spring Data REST",
+  "author": "Chanwook Park",
+  "dependencies": {
+    "react-tools": "^0.13.3"
+  },
+  "devDependencies": {
+    "bower": "^1.3.12"
+  }
+}
