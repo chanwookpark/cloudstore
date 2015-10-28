@@ -21,12 +21,22 @@ public class ProductDataLoader implements CommandLineRunner {
     ProductJpaRepository repository;
 
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(String... args) throws Exception {
+        int max = getMaxIndex(args);
         List<Product> list = new ArrayList<>();
-        list.add(new Product("1", 1, "PRD1", "DISPLAY1"));
-        list.add(new Product("2", 2, "PRD2", "DISPLAY3"));
-        list.add(new Product("3", 3, "PRD2", "DISPLAY3"));
+        for (int i = 1; i < max; i++) {
+            list.add(new Product(String.valueOf(i), i, "PRD" + i, "DISPLAY" + i));
+        }
 
         this.repository.save(list);
+    }
+
+    private int getMaxIndex(String[] args) {
+        for (String arg : args) {
+            if ("MAX_PRD_LOAD".equals(arg)) {
+                return Integer.valueOf(arg);
+            }
+        }
+        return 20;
     }
 }
