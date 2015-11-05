@@ -9,7 +9,7 @@ define(function (require) {
 
     var App = React.createClass({
         getInitialState: function () {
-            return ({products: [], attributes: [], pageSize: 2, link: []});
+            return ({products: [], attributes: [], pageSize: 2, links: []});
         },
         componentDidMount: function () {
             this.loadFromServer(this.state.pageSize);
@@ -31,7 +31,7 @@ define(function (require) {
                         products: productCollection.entity._embedded.products,
                         attributes: Object.keys(this.schema.properties),
                         pageSize: pageSize,
-                        link: productCollection.entity._link
+                        links: productCollection.entity._links
                     });
                 });
         },
@@ -40,7 +40,7 @@ define(function (require) {
                 .then(productCollection => {
                     return client({
                         method: 'POST',
-                        path: productCollection.entity._link.self.href,
+                        path: productCollection.entity._links.self.href,
                         entity: newProduct,
                         headers: {'Content-Type': 'application/json'}
                     })
@@ -51,7 +51,7 @@ define(function (require) {
                     ]);
                 })
                 .done(response => {
-                    this.onNavigate(response.entity._link.last.href)
+                    this.onNavigate(response.entity._links.last.href)
                 });
         },
         onNavigate: function (navURI) {
@@ -61,16 +61,18 @@ define(function (require) {
                         products: productCollection.entity._embedded.products,
                         attributes: this.state.attributes,
                         pageSize: this.state.pageSize,
-                        link: productCollection.entity._link
+                        links: productCollection.entity._links
                     });
 
                 });
         },
         onDelete: function (product) {
-            client({method: 'DELETE', path: product._links.self.href})
-                .done(response => {
-                    this.loadFromServer(this.state.pageSize);
-                });
+            if (product != null) {
+                client({method: 'DELETE', path: product._links.self.href})
+                    .done(response => {
+                        this.loadFromServer(this.state.pageSize);
+                    });
+            }
         },
         updatePageSize: function (pageSize) {
             if (pageSize !== this.state.pageSize) {
@@ -80,10 +82,15 @@ define(function (require) {
         render: function () {
             return (
                 <div>
-                    <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
-                    <ProductList products={this.state.products} link={this.state.links}
+                    <CreateDialog attributes={this.state.attributes}
+                                  onCreate={this.onCreate}/>
+
+                    <ProductList products={this.state.products}
+                                 links={this.state.links}
                                  pageSize={this.state.pageSize}
-                                 onNavigate={this.onNavigate} onDelete={this.onDelete} />
+                                 onNavigate={this.onNavigate}
+                                 onDelete={this.onDelete}
+                                 updatePageSize={this.updatePageSize}/>
                 </div>
             )
         }
@@ -92,6 +99,7 @@ define(function (require) {
     var ProductList = React.createClass({
         handleInput: function (e) {
             e.preventDefault();
+
             var pageSize = React.findDOMNode(this.refs.pageSize).value;
             if (/^[0-9]+$/.test(pageSize)) {
                 this.props.updatePageSize(pageSize);
@@ -120,7 +128,6 @@ define(function (require) {
                     <Product key={product._links.self.href} product={product}
                              onDelete={this.props.onDelete}/>
             );
-
             var navLinks = [];
             if ("first" in this.props.links) {
                 navLinks.push(<button key="first" onClick={this.handleNavFirst}>&lt;&lt;</button>);
@@ -144,7 +151,7 @@ define(function (require) {
                             <th>Product Name</th>
                             <th>Display Name</th>
                             <th>Tenant ID</th>
-                            <th></th>
+                            <th>(Action)</th>
                         </tr>
                         {products}
                     </table>
@@ -158,7 +165,7 @@ define(function (require) {
 
     var Product = React.createClass({
         handleDelete: function () {
-            this.props.onDelete(this.props.products);
+            this.props.onDelete(this.props.product);
         },
         render: function () {
             return (
@@ -168,7 +175,7 @@ define(function (require) {
                     <td>{this.props.product.displayName}</td>
                     <td>{this.props.product.tenantId}</td>
                     <td>
-                        <button onclick={this.handleDelete()}>Delete</button>
+                        <button onClick={this.handleDelete}>Delete</button>
                     </td>
                 </tr>
             )
@@ -178,13 +185,15 @@ define(function (require) {
     var CreateDialog = React.createClass({
         handleSubmit: function (e) {
             e.preventDefault();
+
+            // create product by DOM value
             var newProduct = {};
             this.props.attributes.forEach(attribute => {
                 newProduct[attribute] = React.findDOMNode(this.refs[attribute]).value.trim();
             });
             this.props.onCreate(newProduct);
 
-            // clear dialog
+            // clear dialog's input
             this.props.attributes.forEach(attribute => {
                 React.findDOMNode(this.refs[attribute]).value = '';
             });
@@ -195,22 +204,23 @@ define(function (require) {
         render: function () {
             var inputs = this.props.attributes.map(attribute =>
                     <p key={attribute}>
-                        <input type="text" placeholder={attribute} ref={attribute} className="field" />
+                        <input type="text" placeholder={attribute} ref={attribute} className="field"/>
                     </p>
             );
 
             return (
                 <div>
-                    <a href="#createProduct">Create</a>
+                    <a href="#createProduct">Create Product</a>
 
                     <div id="createProduct" className="modalDialog">
                         <div>
                             <a href="#" title="Close" className="close">X</a>
 
                             <h2>Create new product</h2>
+
                             <form>
                                 {inputs}
-                                <button onClick={this.handleSubmit}>Create</button>
+                                <button onClick={this.handleSubmit}>CREATE</button>
                             </form>
                         </div>
                     </div>
