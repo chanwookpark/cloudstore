@@ -1,3 +1,3 @@
-# study for E-Commerce platform
+# Sample project for my Study 
  
 ... 
