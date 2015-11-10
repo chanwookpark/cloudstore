@@ -9,7 +9,7 @@ define(function (require) {
 
     var App = React.createClass({
         getInitialState: function () {
-            return ({products: [], attributes: [], pageSize: 2, links: []});
+            return ({products: [], attributes: [], pageSize: 5, links: []});
         },
         componentDidMount: function () {
             this.loadFromServer(this.state.pageSize);
