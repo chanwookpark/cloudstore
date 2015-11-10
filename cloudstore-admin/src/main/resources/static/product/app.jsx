@@ -5,7 +5,8 @@ define(function (require) {
     var client = require('./client');
     var follow = require('./follow');
 
-    var root = 'http://localhost:8002/api';
+    //var root = 'http://localhost:8002/api';
+    var root = 'http://192.168.99.100:8002/api';
 
     var App = React.createClass({
         getInitialState: function () {
