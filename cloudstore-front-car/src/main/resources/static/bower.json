@@ -1,0 +1,23 @@
+{
+  "name": "cloudstore-front-car",
+  "version": "1.0.0",
+  "description": "Demo of ReactJS + Spring Boot Service",
+  "main": "./product/main.js",
+  "moduleType": [
+    "amd"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.20",
+    "react": "0.14.2",
+    "react-dom": "0.14.2",
+    "requirejs-react-jsx": "~0.14.2"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "cloudstore-front-car",
+  "version": "1.0.0",
+  "description": "Demo of ReactJS + Spring Boot Service",
+  "author": "chanwook",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "bower": "^1.6.5"
+  }
+}

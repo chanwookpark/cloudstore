@@ -2,17 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>cloudstore-parent</artifactId>
         <groupId>cloudstore</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath />
     </parent>
-    <artifactId>cloudstore-admin</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>cloudstore-front-car</artifactId>
 
     <dependencies>
-        <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -23,47 +22,6 @@
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
-        </dependency>
-
-        <!-- UI -->
-        <!-- change to frontend-maven-plugin
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>react</artifactId>
-            <version>0.13.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>react-bootstrap</artifactId>
-            <version>0.25.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>marked</artifactId>
-            <version>0.3.2-1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>requirejs</artifactId>
-            <version>2.1.20</version>
-        </dependency>
-        -->
-
-        <!-- FIXME SOF...
-        <dependency>
-            <groupId>org.webjars.npm</groupId>
-            <artifactId>babel</artifactId>
-            <version>5.8.23</version>
-        </dependency>
-        -->
-
     </dependencies>
 
     <build>
@@ -102,7 +60,7 @@
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <arguments>install</arguments>
+                            <arguments>cache clean install</arguments>
                         </configuration>
                     </execution>
                 </executions>

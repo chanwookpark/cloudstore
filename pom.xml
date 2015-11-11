@@ -12,6 +12,7 @@
     <modules>
         <module>cloudstore-admin</module>
         <module>cloudstore-service-product</module>
+        <module>cloudstore-front-car</module>
     </modules>
 
     <parent>
