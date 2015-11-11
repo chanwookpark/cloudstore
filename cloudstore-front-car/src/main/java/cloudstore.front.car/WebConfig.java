@@ -41,7 +41,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         scripts.add("/static/js/polyfill.js");
         scripts.add("/static/js/react-render.js");
         scripts.add("/static/js/dust-render.js");
-        scripts.add("/META-INF/resources/webjars/dustjs-linkedin/2.6.1/dust-full.js");
+        scripts.add("/static/node_modules/dustjs-linkedin/dist/dust-full.js");
 
         // add jsx components
 //        scripts.add("/static/component/productSlide.js");

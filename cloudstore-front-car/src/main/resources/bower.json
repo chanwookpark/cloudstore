@@ -19,6 +19,7 @@
     "react": "0.14.2",
     "react-dom": "0.14.2",
     "dustjs-linkedin": "2.7.2",
-    "requirejs-react-jsx": "~0.14.2"
+    "requirejs-react-jsx": "~0.14.2",
+    "react-swipe": "~3.0.0"
   }
 }
